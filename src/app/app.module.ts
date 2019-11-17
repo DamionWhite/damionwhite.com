@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReleaseLogComponent } from './release-log/release-log.component';
+import { ChangeLogComponent } from './change-log/change-log.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReleaseLogComponent
+    ChangeLogComponent
   ],
   imports: [
     BrowserModule,
