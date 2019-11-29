@@ -1,4 +1,13 @@
 <div class="changeLog">
+    <div id="versionSelect">
+      <select (change)="onVersionSelect($event)">
+        <option
+          *ngFor="let version of this.versions"
+        >{{version}}</option>
+      </select>
+      {{this.selectedVersion}}
+    </div>
+
     <div class="changeLogHead">
         <h1 class="changeLogTitle">Version {{this.changelog[0].getVersionString()}}</h1>
         <h5 class="changeLogDate">2019-11-9</h5>
