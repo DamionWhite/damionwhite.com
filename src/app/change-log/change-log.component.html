@@ -1,0 +1,53 @@
+<div class="changeLog">
+    <div id="versionSelect">
+      <select (change)="onVersionSelect($event)">
+        <option
+          *ngFor="let version of this.versions"
+        >{{version}}</option>
+      </select>
+      {{this.selectedVersion}}
+    </div>
+
+    <div class="changeLogHead">
+        <h1 class="changeLogTitle">Version {{this.changelog[0].getVersionString()}}</h1>
+        <h5 class="changeLogDate">2019-11-9</h5>
+    </div>
+
+    <div *ngFor="let change of this.changelog">
+        <h1>{{change.getType()}}</h1>
+        <h2>{{change.getMessage()}}</h2>
+        <h3>{{change.getVersionString()}}</h3>
+    </div>
+
+    <!-- <div class="changeLogHead">
+        <h1 class="changeLogTitle">Version 0.0.1</h1>
+        <h5 class="changeLogDate">2019-11-9</h5>
+    </div>
+
+    <div class="changeLogBody">
+        <h2>Added:</h2>
+        <ul>
+            <li>Added Release Log</li>
+        </ul>
+
+        <h2>Changed:</h2>
+        <ul>
+            <li>Started using "Change Log" over "Release Log"</li>
+        </ul>
+
+        <h2>Deprecated:</h2>
+        <ul>
+            <li>"releaseLog" object will be removed, use "changeLog" instead</li>
+        </ul>
+
+        <h2>Removed:</h2>
+        <ul>
+            <li></li>
+        </ul>
+
+        <h2>Bugs Fixed:</h2>
+        <ul>
+            <li></li>
+        </ul>
+    </div> -->
+</div>

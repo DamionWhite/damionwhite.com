@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ReleaseLogComponent } from './release-log/release-log.component';
+import { ChangeLogComponent } from './change-log/change-log.component';
 
 const routes: Routes = [
-  {path: 'release-log', component: ReleaseLogComponent}
+  {path: 'changelog', component: ChangeLogComponent}
 ];
 
 @NgModule({
