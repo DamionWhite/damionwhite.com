@@ -1,0 +1,25 @@
+<div class="changeLog">
+    <app-add-log></app-add-log>
+    <!-- remove line later -->
+    <hr>
+    
+    <div id="versionSelect">
+      <select (change)="onVersionSelect($event)">
+        <option
+          *ngFor="let version of this.versions"
+        >{{version}}</option>
+      </select>
+      {{this.selectedVersion}}
+    </div>
+
+    <div class="changeLogHead">
+        <h1 class="changeLogTitle">Version {{this.changelog[0].getVersionString()}}</h1>
+        <h5 class="changeLogDate">2019-11-9</h5>
+    </div>
+
+    <div *ngFor="let change of this.changelog">
+        <h1>{{change.getType()}}</h1>
+        <h2>{{change.getMessage()}}</h2>
+        <h3>{{change.getVersionString()}}</h3>
+    </div>
+</div>

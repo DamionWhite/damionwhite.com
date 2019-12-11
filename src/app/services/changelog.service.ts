@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Version } from '../version';
 
-interface IChange {
+export interface IChange {
   type: ChangeType;
   message: string;
   version: Version;
@@ -12,7 +12,7 @@ export enum ChangeType {
   Change = 'Change',
   Deprecated = 'Deprecated',
   Removed = 'Removed',
-  Fixed = 'Fixed',
+  Bugfix = 'Bugfix',
   Security = 'Security'
 }
 

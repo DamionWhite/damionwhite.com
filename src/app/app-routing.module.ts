@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ChangeLogComponent } from './change-log/change-log.component';
+import { ChangeLogComponent } from './changelog/changelog.component';
 
 const routes: Routes = [
   {path: 'changelog', component: ChangeLogComponent}

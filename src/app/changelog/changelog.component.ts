@@ -4,9 +4,9 @@ import { Version } from '../version';
 import { NgModel } from '@angular/forms';
 
 @Component({
-  selector: 'app-change-log',
-  templateUrl: './change-log.component.html',
-  styleUrls: ['./change-log.component.scss']
+  selector: 'app-changelog',
+  templateUrl: './changelog.component.html',
+  styleUrls: ['./changelog.component.scss']
 })
 export class ChangeLogComponent implements OnInit {
   public changelog: Change[] = [];
