@@ -8,7 +8,7 @@ import { Version } from 'src/app/version';
   styleUrls: ['./add-log.component.scss']
 })
 export class AddLogComponent implements AfterViewInit {
-  public ChangeType = ChangeType;
+  public ChangeType = ChangeType;   // Make enum accessable to template
 
   public versionName;
   public versionDate;
