@@ -39,3 +39,8 @@
     <button (click)="getChanges()">=</button>
     <button (click)="saveChanges()">></button>
 </div>
+
+<!-- Messages -->
+<div *ngIf="message" class="message">
+  {{ this.message }}
+</div>
