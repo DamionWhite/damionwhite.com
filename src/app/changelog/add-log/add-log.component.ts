@@ -1,4 +1,4 @@
-import { Component, ViewChildren, AfterViewInit, QueryList, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChildren, AfterViewInit, QueryList, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ChangelogService, IChange, ChangeType } from 'src/app/services/changelog.service';
 import { Version } from 'src/app/version';
 
@@ -22,6 +22,12 @@ export class AddLogComponent implements AfterViewInit {
 
   ngAfterViewInit() {
 
+  }
+
+  @HostListener('keydown', ['$event']) onKeyDown(e: KeyboardEvent) {
+    if (e.ctrlKey && e.key === 'Enter') {
+      this.saveChanges();
+    }
   }
 
   addNewChange() {
