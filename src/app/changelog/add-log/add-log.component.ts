@@ -24,6 +24,7 @@ export class AddLogComponent implements AfterViewInit {
 
   }
 
+  // Keyboard Events here
   @HostListener('keydown', ['$event']) onKeyDown(e: KeyboardEvent) {
     if (e.ctrlKey && e.key === 'Enter') {
       this.saveChanges();
@@ -70,10 +71,15 @@ export class AddLogComponent implements AfterViewInit {
   }
 
   saveChanges() {
-    for (const change of this.changes) {
-      this.changelogService.addChange(change);
-    }
+    // Check if version is semantic (x.y.z)
+    if (/([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})/.test(this.version.getVersion())) {
+      for (const change of this.changes) {
+        this.changelogService.addChange(change);
+      }
 
-    this.message = `Changes added for version ${this.version.getVersion()}`;
+      this.message = `Changes added for version ${this.version.getVersion()}`;
+    } else {
+      this.message = `Please use semantic versioning: Major.Minor.Patch`;
+    }
   }
 }
