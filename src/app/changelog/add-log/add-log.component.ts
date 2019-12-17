@@ -8,14 +8,15 @@ import { Version } from 'src/app/version';
   styleUrls: ['./add-log.component.scss']
 })
 export class AddLogComponent implements AfterViewInit {
-  public ChangeType = ChangeType;   // Make enum accessable to template
-
-  public versionName;
-  public versionDate;
-
   @ViewChild('date', {read: ElementRef, static: true}) dateHtml: ElementRef;
   @ViewChildren('change') changesHtml: QueryList<any>;
+  public ChangeType = ChangeType;   // Make enum accessable to template
+
   public changes: IChange[] = [];
+  public version: Version;
+  public versionName;
+  public versionDate;
+  public message = '';
 
   constructor(private changelogService: ChangelogService) { }
 
@@ -24,8 +25,12 @@ export class AddLogComponent implements AfterViewInit {
   }
 
   addNewChange() {
-    const type = ChangeType[this.changesHtml.last.nativeElement.children[0].value] as ChangeType;
-    const message = (this.changesHtml.last.nativeElement.children[1] as HTMLInputElement).value;
+    const type = ChangeType[
+      this.changesHtml.last.nativeElement.children[0].value
+    ] as ChangeType;
+    const message =
+      ( this.changesHtml.last.nativeElement.children[1] as HTMLInputElement )
+      .value;
 
     // Get & Set Version
     const version = new Version();
@@ -38,6 +43,9 @@ export class AddLogComponent implements AfterViewInit {
 
     version.setVersion();
 
+    if (this.version !== version) {
+      this.version = version;
+    }
 
     // Add to changes[]
     this.changes.push({
@@ -59,5 +67,7 @@ export class AddLogComponent implements AfterViewInit {
     for (const change of this.changes) {
       this.changelogService.addChange(change);
     }
+
+    this.message = `Changes added for version ${this.version.getVersion()}`;
   }
 }
