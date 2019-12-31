@@ -21,6 +21,8 @@ export class AddLogComponent implements AfterViewInit {
   constructor(private changelogService: ChangelogService) { }
 
   ngAfterViewInit() {
+    // Setup empty change
+    this.changes.push({type: ChangeType.Added, message: "", version: undefined});
 
   }
 
@@ -31,39 +33,13 @@ export class AddLogComponent implements AfterViewInit {
     }
   }
 
-  addNewChange() {
-    const type = ChangeType[
-      this.changesHtml.last.nativeElement.children[0].value
-    ] as ChangeType;
-    const message =
-      ( this.changesHtml.last.nativeElement.children[1] as HTMLInputElement )
-      .value;
-
-    // Get & Set Version
-    const version = new Version();
-
-    const versionArr = this.versionName.split('.');
-
-    version.setMajor(versionArr[0]);
-    version.setMinor(versionArr[1]);
-    version.setPatch(versionArr[2]);
-
-    version.setVersion();
-
-    if (this.version !== version) {
-      this.version = version;
+  // If change is last, add new empty change to changes
+  onInput(index) {
+    // Is element changed the last in array?
+    if (this.changes.length === index+1) {
+      // Add new empty change
+      this.changes.push({type: ChangeType.Added, message: "", version: undefined});
     }
-
-    // Add to changes[]
-    this.changes.push({
-      type,
-      message,
-      version
-    });
-
-    // Clear newChange description
-    this.changesHtml.last.nativeElement.children[1].value = '';
-
   }
 
   getChanges() {
@@ -71,13 +47,26 @@ export class AddLogComponent implements AfterViewInit {
   }
 
   saveChanges() {
+     // Get & Set Version
+     const version = new Version();
+     const versionArr = this.versionName.split('.');
+ 
+     version.setMajor(versionArr[0]);
+     version.setMinor(versionArr[1]);
+     version.setPatch(versionArr[2]);
+ 
+     version.setVersion();
+
     // Check if version is semantic (x.y.z)
-    if (/([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})/.test(this.version.getVersion())) {
+    if (/([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})/.test(version.getVersion())) {
       for (const change of this.changes) {
-        this.changelogService.addChange(change);
+        if (change.message !== "") {
+          change.version = version;
+          this.changelogService.addChange(change);
+        }
       }
 
-      this.message = `Changes added for version ${this.version.getVersion()}`;
+      this.message = `Changes added for version ${version.getVersion()}`;
     } else {
       this.message = `Please use semantic versioning: Major.Minor.Patch`;
     }

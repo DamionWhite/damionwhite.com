@@ -11,7 +11,7 @@
 
 <!-- Changes -->
 <div class="logFeature" *ngFor="let change of changes; let i = index" #change>
-    <select name="" id="" [value]="changes[i].type">
+    <select name="" id="" [(ngModel)]="changes[i].type">
         <option value="Added">Added</option>
         <option value="Change">Change</option>
         <option value="Bugfix">Bug-fix</option>
@@ -19,23 +19,14 @@
         <option value="Removed">Removed</option>
         <option value="Security">Security</option>
     </select>
-    <input type="text" [value]="changes[i].message">
+    <input type="text"
+        [(ngModel)]="changes[i].message"
+        (input)="onInput(i)">
 </div>
 
 <!-- New Change -->
-<div class="logFeature" #change>
-    <select name="" id="newChangeType">
-        <option value="Added">Added</option>
-        <option value="Change">Change</option>
-        <option value="Bugfix">Bug-fix</option>
-        <option value="Deprecated">Deprecated</option>
-        <option value="Removed">Removed</option>
-        <option value="Security">Security</option>
-    </select>
-    <input type="text">
-
+<div class="logFeature">
     <!-- Buttons for debug purposes -->
-    <button (click)="addNewChange()">+</button>
     <button (click)="getChanges()">=</button>
     <button (click)="saveChanges()">></button>
 </div>
