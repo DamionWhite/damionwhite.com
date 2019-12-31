@@ -1,0 +1,41 @@
+<div class="changelog">
+    <app-add-log></app-add-log>
+    <!-- remove line later -->
+    <hr>
+
+    <div id="versionSelect">
+      <select (change)="onVersionSelect($event)">
+        <option
+          *ngFor="let version of this.versions"
+        >{{version}}</option>
+      </select>
+      {{this.selectedVersion}}
+    </div>
+
+    <div class="changelogHead">
+        <h1 class="changelogTitle">
+          <!-- Get Version from a change -->
+          <!-- TODO: Let component keep track of change -->
+          Version {{this.changelog[0].getVersionString()}}
+        </h1>
+        <h5 class="changelogDate">2019-11-9</h5>
+    </div>
+
+    <div class="changelogBody">
+      <!-- Do for every change type -->
+      <ul *ngFor="let changeType of [ ChangeType.Added, ChangeType.Bugfix,
+      ChangeType.Change, ChangeType.Deprecated, ChangeType.Removed,
+      ChangeType.Security ]"
+      [id]="'changelog'+changeType"
+      >
+      <!-- Only add heading if changes with this type are present -->
+      <div *ngIf="this.isChangeTypePresent(changeType)">
+        <h1>{{ changeType }}</h1>
+        <li *ngFor="let change of this.getChangesByType(changeType)">
+          {{change.getMessage()}}
+        </li>
+      </div>
+    </ul>
+  </div>
+
+</div>
